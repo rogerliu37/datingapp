@@ -4,22 +4,12 @@ import 'dateTab.dart';
 import 'matchTab.dart';
 import 'contactTab.dart';
 
-void main() {
-  runApp(new MainApp());
-}
-
-class MainApp extends StatelessWidget {
+class BottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final tabController = new DefaultTabController(
+    return new DefaultTabController(
       length: 4,
       child: new Scaffold(
-        appBar: new AppBar(
-          title: Image.asset('images/mainLogo.PNG',
-              fit: BoxFit.cover, height: 150.0),
-          backgroundColor: Colors.teal[200],
-        ),
-
         //Converted BottomTabBar
         bottomNavigationBar: new TabBar(
             labelColor: Colors.white,
@@ -44,7 +34,5 @@ class MainApp extends StatelessWidget {
         ),
       ),
     );
-
-    return new MaterialApp(title: "3rd Wheel", home: tabController);
   }
 }
