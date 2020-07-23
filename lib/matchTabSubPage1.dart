@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
 import 'matchTabSubPage2.dart';
+import 'bottomNavBar.dart';
 
 class MatchTabSubPage1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        backgroundColor: Colors.redAccent[700],
-        appBar: new AppBar(
-          title: Image.asset('images/mainLogo.PNG',
-              fit: BoxFit.cover, height: 150.0),
-          backgroundColor: Colors.amberAccent[200],
-        ),
-        body: Center(
-          child: Container(
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage('images/background1.png'),
-                      fit: BoxFit.cover)),
-              child: MyStatefulWidget()),
-        ));
+      backgroundColor: Colors.redAccent[700],
+      appBar: new AppBar(
+        title: Image.asset('images/mainLogo.PNG',
+            fit: BoxFit.cover, height: 150.0),
+        backgroundColor: Colors.amberAccent[200],
+      ),
+      body: Center(
+        child: Container(
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('images/background1.png'),
+                    fit: BoxFit.cover)),
+            child: MyStatefulWidget()),
+      ),
+    );
   }
 }
 
