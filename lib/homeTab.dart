@@ -4,6 +4,11 @@ class homeTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+        appBar: new AppBar(
+          title: Image.asset('images/mainLogo.PNG',
+              fit: BoxFit.cover, height: 150.0),
+          backgroundColor: Colors.teal[200],
+        ),
         backgroundColor: Colors.redAccent[700],
         body: Container(
           decoration: BoxDecoration(

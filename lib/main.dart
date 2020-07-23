@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'homeTab.dart';
 import 'dateTab.dart';
 import 'newsTab.dart';
-import 'contactTab.dart';
+import 'profileTab.dart';
 import 'createTab.dart';
 
 void main() {
@@ -31,16 +31,11 @@ class _HomeState extends State<Home> {
     new newsTab(),
     new createTab(),
     new dateTab(),
-    new contactTab(),
+    new profileTab(),
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: new AppBar(
-        title: Image.asset('images/mainLogo.PNG',
-            fit: BoxFit.cover, height: 150.0),
-        backgroundColor: Colors.teal[200],
-      ),
       body: _children[_currentIndex],
       //Converted BottomTabBar
       bottomNavigationBar: BottomNavigationBar(
