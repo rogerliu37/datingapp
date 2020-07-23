@@ -7,7 +7,7 @@ class homeTab extends StatelessWidget {
         appBar: new AppBar(
           title: Image.asset('images/mainLogo.PNG',
               fit: BoxFit.cover, height: 150.0),
-          backgroundColor: Colors.teal[200],
+          backgroundColor: Colors.amber[200],
         ),
         backgroundColor: Colors.redAccent[700],
         body: Container(
