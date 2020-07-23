@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'homeTab.dart';
 import 'dateTab.dart';
-import 'matchTab.dart';
+import 'newsTab.dart';
 import 'contactTab.dart';
+import 'createTab.dart';
 
 void main() {
   runApp(new MainApp());
@@ -27,8 +28,8 @@ class _HomeState extends State<Home> {
   int _currentIndex = 0;
   final List<Widget> _children = [
     new homeTab(),
-    new matchTab(),
-    new matchTab(),
+    new newsTab(),
+    new createTab(),
     new dateTab(),
     new contactTab(),
   ];

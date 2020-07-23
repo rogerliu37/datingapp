@@ -1,25 +1,19 @@
 import 'package:flutter/material.dart';
-import 'matchTabSubPage2.dart';
+import 'matchTabSubPage1.dart';
 
-class MatchTabSubPage1 extends StatelessWidget {
+class forms extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      backgroundColor: Colors.redAccent[700],
-      appBar: new AppBar(
-        title: Image.asset('images/mainLogo.PNG',
-            fit: BoxFit.cover, height: 150.0),
-        backgroundColor: Colors.amberAccent[200],
-      ),
-      body: Center(
-        child: Container(
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage('images/background1.png'),
-                    fit: BoxFit.cover)),
-            child: MyStatefulWidget()),
-      ),
-    );
+        backgroundColor: Colors.redAccent[700],
+        body: Center(
+          child: Container(
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('images/background2.JPG'),
+                      fit: BoxFit.cover)),
+              child: MyStatefulWidget()),
+        ));
   }
 }
 
@@ -40,7 +34,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          //University
+          //First Name
           Flexible(
             child: Card(
               color: Colors.white,
@@ -48,8 +42,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               child: TextFormField(
                 style: TextStyle(color: Colors.black),
                 decoration: const InputDecoration(
-                  icon: Icon(Icons.school),
-                  hintText: 'University',
+                  icon: Icon(Icons.sentiment_dissatisfied),
+                  hintText: 'How ya feeling?',
                 ),
                 validator: (value) {
                   if (value.isEmpty) {
@@ -68,8 +62,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               child: TextFormField(
                 style: TextStyle(color: Colors.black),
                 decoration: const InputDecoration(
-                  icon: Icon(Icons.person),
-                  hintText: 'Gender',
+                  icon: Icon(Icons.sentiment_neutral),
+                  hintText: 'Neutral',
                 ),
                 validator: (value) {
                   if (value.isEmpty) {
@@ -88,8 +82,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               child: TextFormField(
                 style: TextStyle(color: Colors.black),
                 decoration: const InputDecoration(
-                  icon: Icon(Icons.email),
-                  hintText: 'Something',
+                  icon: Icon(Icons.sentiment_satisfied),
+                  hintText: 'Email',
                 ),
                 validator: (value) {
                   if (value.isEmpty) {
@@ -109,7 +103,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 style: TextStyle(color: Colors.black),
                 decoration: const InputDecoration(
                   icon: Icon(Icons.phone),
-                  hintText: 'Something',
+                  hintText: 'Phone number',
                 ),
                 validator: (value) {
                   if (value.isEmpty) {
@@ -129,7 +123,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 style: TextStyle(color: Colors.black),
                 decoration: const InputDecoration(
                   icon: Icon(Icons.cake),
-                  hintText: 'Something',
+                  hintText: 'Date of Birth',
                 ),
                 validator: (value) {
                   if (value.isEmpty) {
@@ -151,7 +145,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 if (_formKey.currentState.validate()) {
                   // Process data.
                   //Goes to next subpage
-                  navigateToSubPage2(context);
+                  navigateToSubPage1(context);
                 }
               },
               child: Text('Submit'),
@@ -163,7 +157,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   }
 }
 
-Future navigateToSubPage2(context) async {
+Future navigateToSubPage1(context) async {
   Navigator.push(
-      context, MaterialPageRoute(builder: (context) => MatchTabSubPage2()));
+      context, MaterialPageRoute(builder: (context) => MatchTabSubPage1()));
 }

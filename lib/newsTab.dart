@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'matchTabSubPage1.dart';
 
-class matchTab extends StatelessWidget {
+class newsTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -12,19 +12,19 @@ class matchTab extends StatelessWidget {
                   image: DecorationImage(
                       image: AssetImage('images/background2.JPG'),
                       fit: BoxFit.cover)),
-              child: MyStatefulWidget()),
+              child: buildNewsTab()),
         ));
   }
 }
 
-class MyStatefulWidget extends StatefulWidget {
-  MyStatefulWidget({Key key}) : super(key: key);
+class buildNewsTab extends StatefulWidget {
+  buildNewsTab({Key key}) : super(key: key);
 
   @override
-  _MyStatefulWidgetState createState() => _MyStatefulWidgetState();
+  _buildNewsTabState createState() => _buildNewsTabState();
 }
 
-class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+class _buildNewsTabState extends State<buildNewsTab> {
   final _formKey = GlobalKey<FormState>();
 
   @override
