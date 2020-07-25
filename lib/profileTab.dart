@@ -353,23 +353,137 @@ class _profile extends State<profileTab> {
         context: context,
         builder: (context) {
           return Container(
-            color: Colors.black87,
-            child: Column(
+            color: Colors.grey[850],
+            child: ListView(
               children: <Widget>[
-                ListTile(
-                  leading: Icon(
-                    Icons.delete,
-                    color: Colors.teal,
-                  ),
-                  title: Text('Delete Account',
-                      style: TextStyle(
-                          color: Colors.teal.shade900,
+                Column(
+                  children: <Widget>[
+                    //Delete Account
+                    ListTile(
+                      leading: Icon(
+                        Icons.delete,
+                        color: Colors.teal,
+                      ),
+                      title: Text('Delete Account',
+                          style: TextStyle(
+                              color: Colors.teal.shade500,
+                              fontFamily: 'Source Sans Pro',
+                              fontSize: 20.0)),
+                      onTap: () => _navigatePage(),
+                    ),
+                    //Location On
+                    ListTile(
+                      leading: Icon(
+                        Icons.location_on,
+                        color: Colors.teal,
+                      ),
+                      title: Text('Location Settings',
+                          style: TextStyle(
+                              color: Colors.teal.shade500,
+                              fontFamily: 'Source Sans Pro',
+                              fontSize: 20.0)),
+                      onTap: () => _navigatePage(),
+                    ),
+                    //UserName Change
+                    ListTile(
+                      leading: Icon(
+                        Icons.edit,
+                        color: Colors.teal,
+                      ),
+                      title: Text('Username Change',
+                          style: TextStyle(
+                              color: Colors.teal.shade500,
+                              fontFamily: 'Source Sans Pro',
+                              fontSize: 20.0)),
+                      onTap: () => _navigatePage(),
+                    ),
+                    //Preference Change
+                    ListTile(
+                      leading: Icon(
+                        Icons.chat,
+                        color: Colors.teal,
+                      ),
+                      title: Text('Preference Change',
+                          style: TextStyle(
+                              color: Colors.teal.shade500,
+                              fontFamily: 'Source Sans Pro',
+                              fontSize: 20.0)),
+                      onTap: () => _navigatePage(),
+                    ),
+                    //Credit Card Info Change
+                    ListTile(
+                      leading: Icon(
+                        Icons.credit_card,
+                        color: Colors.teal,
+                      ),
+                      title: Text('Change Payment',
+                          style: TextStyle(
+                              color: Colors.teal.shade500,
+                              fontFamily: 'Source Sans Pro',
+                              fontSize: 20.0)),
+                      onTap: () => _navigatePage(),
+                    ),
+                    //Notification
+                    ListTile(
+                      leading: Icon(
+                        Icons.notifications_active,
+                        color: Colors.teal,
+                      ),
+                      title: Text('Notifications',
+                          style: TextStyle(
+                              color: Colors.teal.shade500,
+                              fontFamily: 'Source Sans Pro',
+                              fontSize: 20.0)),
+                      onTap: () => _navigatePage(),
+                    ),
+                    //Help
+                    ListTile(
+                      leading: Icon(
+                        Icons.help,
+                        color: Colors.teal,
+                      ),
+                      title: Text('Help',
+                          style: TextStyle(
+                              color: Colors.teal.shade500,
+                              fontFamily: 'Source Sans Pro',
+                              fontSize: 20.0)),
+                      onTap: () => _navigatePage(),
+                    ),
+                    //About
+                    ListTile(
+                      leading: Icon(
+                        Icons.question_answer,
+                        color: Colors.teal,
+                      ),
+                      title: Text('About',
+                          style: TextStyle(
+                              color: Colors.teal.shade500,
+                              fontFamily: 'Source Sans Pro',
+                              fontSize: 20.0)),
+                      onTap: () => _navigatePage(),
+                    ),
+                    //Logout
+                    ListTile(
+                      title: Text(
+                        'Log Out',
+                        style: TextStyle(
+                          color: Colors.teal.shade500,
                           fontFamily: 'Source Sans Pro',
-                          fontSize: 20.0)),
-                )
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      onTap: () => _navigatePage(),
+                    ),
+                  ],
+                ),
               ],
             ),
           );
         });
+  }
+
+  void _navigatePage() {
+    Navigator.pop(context);
   }
 }
