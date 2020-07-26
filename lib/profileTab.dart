@@ -483,6 +483,7 @@ class _profile extends State<profileTab> {
         });
   }
 
+  //TODO: Implement all the navigation when each tile is pressed
   void _navigatePage() {
     Navigator.pop(context);
   }

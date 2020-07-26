@@ -27,7 +27,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int _currentIndex = 0;
   final List<Widget> _children = [
-    new homeTab(),
+    new HomeTab(),
     new newsTab(),
     new createTab(),
     new dateTab(),

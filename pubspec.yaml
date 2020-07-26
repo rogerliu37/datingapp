@@ -24,6 +24,11 @@ flutter:
      - images/mainLogo.PNG
      - images/background1.png
      - images/background2.JPG
+     - images/brewedL.jpg
+     - images/chatime.jpg
+     - images/kftStore.jpeg
+     - images/mmt.jpeg
+     - images/vivi.jpg
 
 
   fonts:
