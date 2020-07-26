@@ -5,18 +5,28 @@ class newsTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        backgroundColor: Colors.redAccent[700],
+        appBar: new AppBar(
+          title: Image.asset('images/mainLogo.PNG',
+              fit: BoxFit.cover, height: 150.0),
+          backgroundColor: Colors.amber[200],
+        ),
+        backgroundColor: Colors.grey[850],
         body: Center(
           child: Container(
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage('images/background2.JPG'),
-                      fit: BoxFit.cover)),
-              child: buildNewsTab()),
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('images/background2.JPG'),
+                    fit: BoxFit.cover)),
+            child: Center(
+              child: Text(
+                  'News Feed or Explore Page: Get them thinking about date ideas'),
+            ),
+          ),
         ));
   }
 }
 
+//buildNewsTab()
 class buildNewsTab extends StatefulWidget {
   buildNewsTab({Key key}) : super(key: key);
 
