@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>312650297106-k8ripsdg86r6kqilhato7iaqq6isfr9i.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.312650297106-k8ripsdg86r6kqilhato7iaqq6isfr9i</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>312650297106-p8s0svl411bksfllif7f6cialiudidph.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBjRw-8CZDmqMH5KhXOyV9hYsHuW52r-Sg</string>
+	<key>GCM_SENDER_ID</key>
+	<string>312650297106</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>tylerliu.demo3rdwheelhp</string>
+	<key>PROJECT_ID</key>
+	<string>rdwheel-app</string>
+	<key>STORAGE_BUCKET</key>
+	<string>rdwheel-app.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:312650297106:ios:66c1ca59e48accd0214dcb</string>
+	<key>DATABASE_URL</key>
+	<string>https://rdwheel-app.firebaseio.com</string>
+</dict>
+</plist>
