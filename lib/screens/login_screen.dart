@@ -18,16 +18,38 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: UniversalVariables.blackColor,
-      body: Stack(
-        children: [
-          Center(
-            child: loginButton(),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          //TODO Fix login screen (Design)
+          Container(
+            child: Center(
+              child: Text(
+                "3RD WHEEL",
+                style: TextStyle(
+                  fontSize: 35,
+                  fontWeight: FontWeight.w900,
+                  letterSpacing: 1.2,
+                  color: Colors.white,
+                ),
+              ),
+            ),
           ),
-          isLoginPressed
-              ? Center(
-                  child: CircularProgressIndicator(),
-                )
-              : Container()
+          Container(
+            child: Stack(
+              children: [
+                Center(
+                  child: loginButton(),
+                ),
+                isLoginPressed
+                    ? Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : Container()
+              ],
+            ),
+          ),
         ],
       ),
     );

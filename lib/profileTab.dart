@@ -1,4 +1,7 @@
+import 'package:demo3rdwheelhp/screens/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:demo3rdwheelhp/resources/firebase_repository.dart';
 
 class profileTab extends StatefulWidget {
   @override
@@ -6,6 +9,8 @@ class profileTab extends StatefulWidget {
 }
 
 class _profile extends State<profileTab> {
+  FirebaseRepository _repository = FirebaseRepository();
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -473,7 +478,7 @@ class _profile extends State<profileTab> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      onTap: () => _navigatePage(),
+                      onTap: () => signOut(),
                     ),
                   ],
                 ),
@@ -481,6 +486,22 @@ class _profile extends State<profileTab> {
             ),
           );
         });
+  }
+
+  /*
+    Signs user out and prevents them from entering back (protecting data)
+   */
+  signOut() async {
+    final bool isLoggedOut = await _repository.signOut();
+    if (isLoggedOut) {
+      //Navigate the user to the login screen
+      //Such that he is not able to back by tapping the back button
+
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => LoginScreen()),
+          (Route<dynamic> route) => false);
+    }
   }
 
   //TODO: Implement all the navigation when each tile is pressed
