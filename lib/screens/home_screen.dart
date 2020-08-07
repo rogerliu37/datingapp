@@ -1,3 +1,4 @@
+import 'package:demo3rdwheelhp/utils/universal_variables.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:demo3rdwheelhp/resources/firebase_repository.dart';
@@ -37,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
         currentIndex: _currentIndex,
         iconSize: 30.0,
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.grey[850],
+        backgroundColor: Colors.grey[900],
         items: [
           BottomNavigationBarItem(
             title: new Text(""),

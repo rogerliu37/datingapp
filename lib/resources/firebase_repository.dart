@@ -1,3 +1,4 @@
+import 'package:demo3rdwheelhp/models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'firebase_methods.dart';
 
@@ -18,4 +19,8 @@ class FirebaseRepository {
       _firebaseMethods.addDataToDb(user);
   //Sign out
   Future<bool> signOut() => _firebaseMethods.signOut();
+
+  //Fetch all users
+  Future<List<User>> fetchAllUsers(FirebaseUser user) =>
+      _firebaseMethods.fetchAllUsers(user);
 }

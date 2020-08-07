@@ -1,3 +1,4 @@
+import 'package:demo3rdwheelhp/screens/chat_list_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeTab extends StatefulWidget {
@@ -20,6 +21,16 @@ class _homeTab extends State<HomeTab> {
         title: Image.asset('images/mainLogo.PNG',
             fit: BoxFit.cover, height: 150.0),
         backgroundColor: Colors.amber[200],
+        //Lead user to DM page for chatting, potentially video, etc.
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.textsms,
+              color: Colors.white,
+            ),
+            onPressed: () => _onButtonPressed(),
+          ),
+        ],
       ),
       backgroundColor: Colors.grey[850],
       body: Scrollbar(
@@ -61,7 +72,8 @@ class _homeTab extends State<HomeTab> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               SizedBox(
-                                height: 184,
+                                height:
+                                    184, //TODO Get number of pixels of device, then using that resize the box
                                 child: Stack(
                                   children: [
                                     Positioned.fill(
@@ -530,5 +542,13 @@ class _homeTab extends State<HomeTab> {
         ),
       ),
     );
+  }
+
+  /*
+  Send user to the DM page.
+   */
+  _onButtonPressed() {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => ChatListScreen()));
   }
 }

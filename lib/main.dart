@@ -1,6 +1,7 @@
 import 'package:demo3rdwheelhp/resources/firebase_repository.dart';
 import 'package:demo3rdwheelhp/screens/home_screen.dart';
 import 'package:demo3rdwheelhp/screens/login_screen.dart';
+import 'package:demo3rdwheelhp/screens/search_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -21,6 +22,10 @@ class _HomeState extends State<Home> {
     return MaterialApp(
       title: "3rd Wheel",
       debugShowMaterialGrid: false,
+      initialRoute: "/", //This main.dart is our first page
+      routes: {
+        'search_screen': (context) => searchScreen(),
+      },
       home: FutureBuilder(
         future: _repository.getCurrentUser(),
         builder: (context, AsyncSnapshot<FirebaseUser> snapshot) {

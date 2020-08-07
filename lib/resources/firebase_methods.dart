@@ -77,4 +77,19 @@ class FirebaseMethods {
       return false;
     }
   }
+
+  //Create a list of all users for searching
+  Future<List<User>> fetchAllUsers(FirebaseUser currentUser) async {
+    List<User> userList = List<User>();
+
+    QuerySnapshot querySnapshot =
+        await firestore.collection("users").getDocuments();
+    for (var i = 0; i < querySnapshot.documents.length; i++) {
+      //Prevent user from finding themselves
+      if (querySnapshot.documents[i].documentID != currentUser.uid) {
+        userList.add(User.fromMap(querySnapshot.documents[i].data));
+      }
+    }
+    return userList;
+  }
 }
