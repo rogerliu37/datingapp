@@ -1,5 +1,9 @@
+import 'package:demo3rdwheelhp/resources/firebase_repository.dart';
+import 'package:demo3rdwheelhp/utils/universal_variables.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'matchTabSubPage1.dart';
+import 'models/user.dart';
 
 class newsTab extends StatelessWidget {
   @override
@@ -9,6 +13,14 @@ class newsTab extends StatelessWidget {
           title: Image.asset('images/mainLogo.PNG',
               fit: BoxFit.cover, height: 150.0),
           backgroundColor: Colors.amber[200],
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {
+                showSearch(context: context, delegate: DataSearch());
+              },
+            )
+          ],
         ),
         backgroundColor: Colors.grey[850],
         body: Center(
@@ -170,4 +182,93 @@ class _buildNewsTabState extends State<buildNewsTab> {
 Future navigateToSubPage1(context) async {
   Navigator.push(
       context, MaterialPageRoute(builder: (context) => MatchTabSubPage1()));
+}
+
+/*
+SearchDelegate - Try to implement a different way of searching while also
+maintaining the future feature of having a grid view of things to do.
+ */
+class DataSearch extends SearchDelegate<String> {
+  //TODO Create a recent list and change algo in build suggestions
+  FirebaseRepository _repository = FirebaseRepository();
+  List<User> userList;
+
+  void getUserData() {
+    _repository.getCurrentUser().then((FirebaseUser user) {
+      _repository.fetchAllUsers(user).then((List<User> list) {
+        userList = list;
+      });
+    });
+  }
+
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    //Actions for app bar
+    return [
+      IconButton(
+          icon: Icon(Icons.clear),
+          onPressed: () {
+            Navigator.pop(context);
+          })
+    ];
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    //Leading icon on the left the app bar
+    return Icon(Icons.search);
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    //Show some result based on the selection
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    //Show when someone searches for something
+    getUserData();
+    final List<User> suggestionList = query.isEmpty
+        ? []
+        : userList.where((User user) {
+            String _getUsername = user.username.toLowerCase();
+            String _query = query.toLowerCase();
+            String _getName = user.name.toLowerCase();
+            bool matchesUsername = _getUsername.contains(_query);
+            bool matchesName = _getName.contains(_query);
+
+            return (matchesUsername || matchesName);
+          }).toList();
+
+    return ListView.builder(
+      itemCount: suggestionList.length,
+      itemBuilder: ((context, index) {
+        User searchedUser = User(
+          uid: suggestionList[index].uid,
+          profilePhoto: suggestionList[index].profilePhoto,
+          name: suggestionList[index].name,
+          username: suggestionList[index].username,
+        );
+        return ListTile(
+          leading: CircleAvatar(
+            backgroundImage: NetworkImage(searchedUser.profilePhoto),
+            backgroundColor: Colors.grey,
+          ),
+          title: Text(
+            searchedUser.username,
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          subtitle: Text(
+            searchedUser.name,
+            style: TextStyle(
+              color: UniversalVariables.greyColor,
+            ),
+          ),
+        );
+      }),
+    );
+  }
 }

@@ -42,11 +42,11 @@ class CustomTile extends StatelessWidget {
               child: Container(
                 margin: EdgeInsets.only(left: mini ? 10 : 15),
                 padding: EdgeInsets.symmetric(vertical: mini ? 3 : 10),
-                decoration: BoxDecoration(
-                  border: Border(
-                      bottom: BorderSide(
-                          width: 1, color: UniversalVariables.separatorColor)),
-                ),
+//                decoration: BoxDecoration(
+//                  border: Border(
+//                      bottom: BorderSide(
+//                          width: 1, color: UniversalVariables.separatorColor)),
+//                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[

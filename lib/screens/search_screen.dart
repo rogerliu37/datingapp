@@ -54,10 +54,10 @@ class _searchScreenState extends State<searchScreen> {
         onPressed: () => Navigator.pop(context),
       ),
       elevation: 0,
-      bottom: PreferredSize(
+      title: PreferredSize(
         preferredSize: const Size.fromHeight(kToolbarHeight - 10),
         child: Padding(
-          padding: EdgeInsets.only(left: 20),
+          padding: EdgeInsets.symmetric(horizontal: 10),
           child: TextField(
             controller: searchController,
             //Receive value
@@ -146,6 +146,7 @@ class _searchScreenState extends State<searchScreen> {
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
+              fontSize: 15,
             ),
           ),
           subtitle: Text(
