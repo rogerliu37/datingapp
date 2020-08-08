@@ -3,6 +3,7 @@ import 'package:demo3rdwheelhp/utils/universal_variables.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'matchTabSubPage1.dart';
+import 'models/restaurant.dart';
 import 'models/user.dart';
 
 class newsTab extends StatelessWidget {
@@ -29,10 +30,7 @@ class newsTab extends StatelessWidget {
                 image: DecorationImage(
                     image: AssetImage('images/background2.JPG'),
                     fit: BoxFit.cover)),
-            child: Center(
-              child: Text(
-                  'News Feed or Explore Page: Get them thinking about date ideas'),
-            ),
+            child: buildNewsTab(),
           ),
         ));
   }
@@ -40,145 +38,80 @@ class newsTab extends StatelessWidget {
 
 //buildNewsTab()
 class buildNewsTab extends StatefulWidget {
-  buildNewsTab({Key key}) : super(key: key);
-
   @override
   _buildNewsTabState createState() => _buildNewsTabState();
 }
 
 class _buildNewsTabState extends State<buildNewsTab> {
-  final _formKey = GlobalKey<FormState>();
+  //TODO figure out how to get restaurant data from data base
+  List<Restaurant> restaurantList(BuildContext context) {
+    return [
+      Restaurant(assetName: "images/brewedL.jpg", title: "Brewed Leaf"),
+      Restaurant(assetName: "images/chatime.jpg", title: "Chatime"),
+      Restaurant(assetName: "images/kftStore.jpeg", title: "Kung Fu Tea"),
+      Restaurant(assetName: "images/mmt.jpeg", title: "Millions of Milktea"),
+      Restaurant(assetName: "images/vivi.jpg", title: "Vivi"),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          //First Name
-          Flexible(
-            child: Card(
-              color: Colors.white,
-              margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-              child: TextFormField(
-                style: TextStyle(color: Colors.black),
-                decoration: const InputDecoration(
-                  icon: Icon(Icons.sentiment_dissatisfied),
-                  hintText: 'How ya feeling?',
-                ),
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Please enter some text';
-                  }
-                  return null;
-                },
-              ),
-            ),
-          ),
-          //Last Name
-          Flexible(
-            child: Card(
-              color: Colors.white,
-              margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-              child: TextFormField(
-                style: TextStyle(color: Colors.black),
-                decoration: const InputDecoration(
-                  icon: Icon(Icons.sentiment_neutral),
-                  hintText: 'Neutral',
-                ),
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Please enter some text';
-                  }
-                  return null;
-                },
-              ),
-            ),
-          ),
-          //Email
-          Flexible(
-            child: Card(
-              color: Colors.white,
-              margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-              child: TextFormField(
-                style: TextStyle(color: Colors.black),
-                decoration: const InputDecoration(
-                  icon: Icon(Icons.sentiment_satisfied),
-                  hintText: 'Email',
-                ),
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Please enter some text';
-                  }
-                  return null;
-                },
-              ),
-            ),
-          ),
-          //Phone Number
-          Flexible(
-            child: Card(
-              color: Colors.white,
-              margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-              child: TextFormField(
-                style: TextStyle(color: Colors.black),
-                decoration: const InputDecoration(
-                  icon: Icon(Icons.phone),
-                  hintText: 'Phone number',
-                ),
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Please enter some text';
-                  }
-                  return null;
-                },
-              ),
-            ),
-          ),
-          //Date of Birth
-          Flexible(
-            child: Card(
-              color: Colors.white,
-              margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-              child: TextFormField(
-                style: TextStyle(color: Colors.black),
-                decoration: const InputDecoration(
-                  icon: Icon(Icons.cake),
-                  hintText: 'Date of Birth',
-                ),
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Please enter some text';
-                  }
-                  return null;
-                },
-              ),
-            ),
-          ),
-          //Submit button (First Page of form)
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(vertical: 16.0, horizontal: 10.0),
-            child: RaisedButton(
-              onPressed: () {
-                // Validate will return true if the form is valid, or false if
-                // the form is invalid.
-                if (_formKey.currentState.validate()) {
-                  // Process data.
-                  //Goes to next subpage
-                  navigateToSubPage1(context);
-                }
-              },
-              child: Text('Submit'),
-            ),
-          ),
-        ],
+    return new Container(
+      child: GridView.count(
+        crossAxisCount: 3,
+        mainAxisSpacing: 8,
+        crossAxisSpacing: 8,
+        padding: const EdgeInsets.all(8),
+        childAspectRatio: 1,
+        children: restaurantList(context).map<Widget>((restaurants) {
+          return restaurantView(
+            restaurants: restaurants,
+          );
+        }).toList(),
       ),
     );
   }
 }
 
+//Text box
+class restaurantData extends StatelessWidget {
+  const restaurantData(this.text);
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return FittedBox(
+      fit: BoxFit.scaleDown,
+      alignment: AlignmentDirectional.centerStart,
+      child: Text(text),
+    );
+  }
+}
+
+class restaurantView extends StatelessWidget {
+  restaurantView({Key key, @required this.restaurants}) : super(key: key);
+  final Restaurant restaurants;
+  @override
+  Widget build(BuildContext context) {
+    return GridTile(
+      footer: Material(
+        color: Colors.transparent,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(bottom: Radius.circular(4)),
+        ),
+        clipBehavior: Clip.antiAlias,
+        child: GridTileBar(
+          backgroundColor: Colors.black45,
+          title: restaurantData(restaurants.title),
+        ),
+      ),
+      child: Image.asset(restaurants.assetName),
+    );
+  }
+}
+
+//TODO Delete this after
 Future navigateToSubPage1(context) async {
   Navigator.push(
       context, MaterialPageRoute(builder: (context) => MatchTabSubPage1()));
