@@ -1,3 +1,4 @@
+import 'package:demo3rdwheelhp/models/message.dart';
 import 'package:demo3rdwheelhp/models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'firebase_methods.dart';
@@ -23,4 +24,8 @@ class FirebaseRepository {
   //Fetch all users
   Future<List<User>> fetchAllUsers(FirebaseUser user) =>
       _firebaseMethods.fetchAllUsers(user);
+
+  //Add messages to database
+  Future<void> addMessageToDb(Message message, User sender, User receiver) =>
+      _firebaseMethods.addMessageToDb(message, sender, receiver);
 }

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:demo3rdwheelhp/models/message.dart';
 import "package:firebase_auth/firebase_auth.dart";
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:demo3rdwheelhp/models/user.dart';
@@ -91,5 +92,25 @@ class FirebaseMethods {
       }
     }
     return userList;
+  }
+
+  //Text messaging feature - adding to database & sending
+  Future<void> addMessageToDb(
+      Message message, User sender, User receiver) async {
+    //Handle message
+    var map = message.toMap();
+
+    //Link to Firestore
+    await firestore
+        .collection("messages")
+        .document(message.senderId)
+        .collection(message.receiverId)
+        .add(map);
+    //Adding data for other user
+    return await firestore
+        .collection("messages")
+        .document(message.receiverId)
+        .collection(message.senderId)
+        .add(map);
   }
 }

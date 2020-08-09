@@ -6,6 +6,8 @@ import 'package:demo3rdwheelhp/resources/firebase_repository.dart';
 import 'package:demo3rdwheelhp/utils/universal_variables.dart';
 import 'package:demo3rdwheelhp/widgets/custom_tile.dart';
 
+import 'chat_screen.dart';
+
 class searchScreen extends StatefulWidget {
   @override
   _searchScreenState createState() => _searchScreenState();
@@ -136,7 +138,15 @@ class _searchScreenState extends State<searchScreen> {
         );
         return CustomTile(
           mini: false,
-          onTap: () {},
+          //Push user to the chat screen
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ChatScreen(
+                          receiver: searchedUser,
+                        )));
+          },
           leading: CircleAvatar(
             backgroundImage: NetworkImage(searchedUser.profilePhoto),
             backgroundColor: Colors.grey,
