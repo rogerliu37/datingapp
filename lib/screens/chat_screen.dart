@@ -71,7 +71,7 @@ class _ChatScreenState extends State<ChatScreen> {
           .collection(MESSAGES_COLLECTION)
           .document(_currentUserId)
           .collection(widget.receiver.uid)
-          .orderBy(TIMESTAMP_FIELD, descending: true)
+          .orderBy(TIMESTAMP_FIELD, descending: false)
           .snapshots(),
       builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
         //Show indicator is snapshot has no data
@@ -191,6 +191,8 @@ class _ChatScreenState extends State<ChatScreen> {
       setState(() {
         isWriting = false;
       });
+
+      textFieldController.text = "";
 
       _repository.addMessageToDb(_message, sender, widget.receiver);
     }
