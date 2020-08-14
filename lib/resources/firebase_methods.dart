@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:demo3rdwheelhp/constants/strings.dart';
 import 'package:demo3rdwheelhp/models/message.dart';
 import "package:firebase_auth/firebase_auth.dart";
 import 'package:google_sign_in/google_sign_in.dart';
@@ -40,8 +41,8 @@ class FirebaseMethods {
   Future<bool> authenticateUser(FirebaseUser user) async {
     //Tell Firebase ro retrun list of all docs
     QuerySnapshot result = await firestore
-        .collection("users")
-        .where("email", isEqualTo: user.email)
+        .collection(USERS_COLLECTION)
+        .where(EMAIL_FIELD, isEqualTo: user.email)
         .getDocuments();
 
     final List<DocumentSnapshot> docs = result.documents;
@@ -61,7 +62,7 @@ class FirebaseMethods {
     );
 
     firestore
-        .collection("users")
+        .collection(USERS_COLLECTION)
         .document(currentUser.uid)
         .setData(user.toMap(user));
   }
@@ -84,7 +85,7 @@ class FirebaseMethods {
     List<User> userList = List<User>();
 
     QuerySnapshot querySnapshot =
-        await firestore.collection("users").getDocuments();
+        await firestore.collection(USERS_COLLECTION).getDocuments();
     for (var i = 0; i < querySnapshot.documents.length; i++) {
       //Prevent user from finding themselves
       if (querySnapshot.documents[i].documentID != currentUser.uid) {
@@ -102,13 +103,13 @@ class FirebaseMethods {
 
     //Link to Firestore
     await firestore
-        .collection("messages")
+        .collection(MESSAGES_COLLECTION)
         .document(message.senderId)
         .collection(message.receiverId)
         .add(map);
     //Adding data for other user
     return await firestore
-        .collection("messages")
+        .collection(MESSAGES_COLLECTION)
         .document(message.receiverId)
         .collection(message.senderId)
         .add(map);

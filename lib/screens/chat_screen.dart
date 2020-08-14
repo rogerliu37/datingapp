@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:demo3rdwheelhp/constants/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:demo3rdwheelhp/models/message.dart';
 import 'package:demo3rdwheelhp/models/user.dart';
@@ -67,10 +68,10 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget messageList() {
     return StreamBuilder(
       stream: Firestore.instance
-          .collection("messages")
+          .collection(MESSAGES_COLLECTION)
           .document(_currentUserId)
           .collection(widget.receiver.uid)
-          .orderBy("timestamp", descending: true)
+          .orderBy(TIMESTAMP_FIELD, descending: true)
           .snapshots(),
       builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
         //Show indicator is snapshot has no data
@@ -89,22 +90,24 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   Widget chatMessageItem(DocumentSnapshot snapshot) {
+    Message _message = Message.fromMap(snapshot.data);
+
     return Container(
       margin: EdgeInsets.symmetric(vertical: 15),
       child: Container(
         //Depending on who sent message, the chat bubble will adjust its alignment
-        alignment: snapshot['senderId'] == _currentUserId
+        alignment: _message.senderId == _currentUserId
             ? Alignment.centerRight
             : Alignment.centerLeft,
         //Adjust the layout of messages based on who sent what
-        child: snapshot['senderId'] == _currentUserId
-            ? senderLayout(snapshot)
-            : receiverLayout(snapshot),
+        child: _message.senderId == _currentUserId
+            ? senderLayout(_message)
+            : receiverLayout(_message),
       ),
     );
   }
 
-  Widget senderLayout(DocumentSnapshot snapshot) {
+  Widget senderLayout(Message message) {
     Radius messageRadius = Radius.circular(10);
 
     return Container(
@@ -121,12 +124,12 @@ class _ChatScreenState extends State<ChatScreen> {
       ),
       child: Padding(
         padding: EdgeInsets.all(10),
-        child: getMessage(snapshot),
+        child: getMessage(message),
       ),
     );
   }
 
-  Widget receiverLayout(DocumentSnapshot snapshot) {
+  Widget receiverLayout(Message message) {
     Radius messageRadius = Radius.circular(10);
 
     return Container(
@@ -143,20 +146,20 @@ class _ChatScreenState extends State<ChatScreen> {
       ),
       child: Padding(
         padding: EdgeInsets.all(10),
-        child: getMessage(snapshot),
+        child: getMessage(message),
       ),
     );
   }
 
   //Generates the message from database into text for user to visually see
-  getMessage(DocumentSnapshot snapshot) {
+  getMessage(Message message) {
     /*
     Snapshot is essentially a map with keys that are linked to different parts
     of the database. Using specific keys will access different parts in tha DB.
     In this case, the snapshot map is modeled by the message.dart model.
      */
     return Text(
-      snapshot['message'],
+      message.message,
       style: TextStyle(
         color: Colors.white,
         fontSize: 16.0,
@@ -182,7 +185,7 @@ class _ChatScreenState extends State<ChatScreen> {
           receiverId: widget.receiver.uid,
           senderId: sender.uid,
           message: text,
-          timeStamp: FieldValue.serverTimestamp(),
+          timeStamp: Timestamp.now(),
           type: 'text');
       //Close text
       setState(() {

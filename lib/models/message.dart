@@ -8,7 +8,7 @@ class Message {
   String receiverId;
   String type;
   String message;
-  FieldValue timeStamp;
+  Timestamp timeStamp;
   String photoUrl;
 
   //Regular Constructor
@@ -40,15 +40,27 @@ class Message {
     return map;
   }
 
+  /*
+  Member function, better practice to make it a named constructor
+   */
+
   //Return message from a map variable
-  Message fromMap(Map<String, dynamic> map) {
-    //Is this recursive?
-    Message _message = Message();
-    _message.senderId = map['senderId'];
-    _message.receiverId = map['receiverId'];
-    _message.type = map['type'];
-    _message.message = map['message'];
-    _message.timeStamp = map['timeStamp'];
-    return _message;
+//  Message fromMap(Map<String, dynamic> map) {
+//    //Is this recursive?
+//    Message _message = Message();
+//    _message.senderId = map['senderId'];
+//    _message.receiverId = map['receiverId'];
+//    _message.type = map['type'];
+//    _message.message = map['message'];
+//    _message.timeStamp = map['timeStamp'];
+//    return _message;
+//  }
+
+  Message.fromMap(Map<String, dynamic> map) {
+    this.senderId = map['senderId'];
+    this.receiverId = map['receiverId'];
+    this.type = map['type'];
+    this.message = map['message'];
+    this.timeStamp = map['timeStamp'];
   }
 }
