@@ -23,16 +23,24 @@ class _calendarScreenState extends State<calendarScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Test"),
+      appBar: new AppBar(
+        title: Image.asset('images/mainLogo.PNG',
+            fit: BoxFit.cover, height: 150.0),
+        backgroundColor: Colors.amber[200],
       ),
-      body: Column(
-        mainAxisSize: MainAxisSize.max,
-        children: <Widget>[
-          // Switch out 2 lines below to play with TableCalendar's settings
-          //-----------------------
-          _buildTableCalendar(),
-        ],
+      body: Container(
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('images/background1.png'),
+                fit: BoxFit.cover)),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: <Widget>[
+            // Switch out 2 lines below to play with TableCalendar's settings
+            //-----------------------
+            _buildTableCalendar(),
+          ],
+        ),
       ),
     );
   }
