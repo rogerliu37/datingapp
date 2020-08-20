@@ -1,4 +1,6 @@
 import 'package:demo3rdwheelhp/screens/login_screen.dart';
+import 'package:demo3rdwheelhp/utils/universal_variables.dart';
+import 'package:demo3rdwheelhp/widgets/custom_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:demo3rdwheelhp/resources/firebase_repository.dart';
@@ -25,18 +27,9 @@ class _profile extends State<profileTab> {
           ),
         ),
         backgroundColor: Colors.black87,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.dehaze,
-              color: Colors.white,
-            ),
-            onPressed: () => _onButtonPressed(),
-          ),
-        ],
       ),
       body: Container(
-        color: Colors.black87,
+        color: Colors.grey[850],
         child: SafeArea(
           child: ListView(
             children: <Widget>[
@@ -96,17 +89,17 @@ class _profile extends State<profileTab> {
                       ),
                     ],
                   ),
-                  //Personal Details
+                  //Account Settings
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       //Text
                       Center(
                         child: Flexible(
-                          child: Text("Personal Details",
+                          child: Text("Account Settings",
                               style: TextStyle(
                                 fontFamily: 'Source Sans Pro',
-                                fontSize: 23.0,
+                                fontSize: 25.0,
                                 color: Colors.teal[100],
                                 fontWeight: FontWeight.bold,
                                 letterSpacing: 2.0,
@@ -129,68 +122,176 @@ class _profile extends State<profileTab> {
                       ),
                     ],
                   ),
-                  //Card for Orientation
-                  Card(
-                    color: Colors.white,
-                    margin:
-                        EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-                    child: ListTile(
-                      leading: Icon(
-                        Icons.wc,
-                        color: Colors.teal,
+                  Column(
+                    children: <Widget>[
+                      //Delete Account
+                      Container(
+                        child: ListTile(
+                          trailing: Icon(
+                            Icons.person,
+                            color: Colors.teal,
+                          ),
+                          title: Text('Personal Information',
+                              style: TextStyle(
+                                  color: Colors.teal.shade500,
+                                  fontFamily: 'Source Sans Pro',
+                                  fontSize: 23.0)),
+                          onTap: () {},
+                        ),
+                        margin: EdgeInsets.symmetric(horizontal: 20),
+                        padding: EdgeInsets.symmetric(vertical: 3),
+                        //alignment: Alignment.centerLeft,
                       ),
-                      title: Text('Orientation: Straight',
-                          style: TextStyle(
-                              color: Colors.teal.shade900,
-                              fontFamily: 'Source Sans Pro',
-                              fontSize: 20.0)),
-                    ),
-                  ),
-                  //Ethnicity
-                  Card(
-                    color: Colors.white,
-                    margin:
-                        EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-                    child: ListTile(
-                      leading: Icon(
-                        Icons.language,
-                        color: Colors.teal,
+                      SizedBox(
+                        //Spacing between text
+                        height: 0,
+                        width: 340.0,
+                        child: Divider(
+                          color: Colors.teal.shade100,
+                        ),
                       ),
-                      title: Text('Ethnicity: Asian',
-                          style: TextStyle(
-                              color: Colors.teal.shade900,
-                              fontFamily: 'Source Sans Pro',
-                              fontSize: 20.0)),
-                    ),
-                  ),
-                  //Myer-Briggs
-                  Card(
-                    color: Colors.white,
-                    margin:
-                        EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-                    child: ListTile(
-                      leading: Icon(
-                        Icons.face,
-                        color: Colors.teal,
+                      //Location On
+                      Container(
+                        child: ListTile(
+                          trailing: Icon(
+                            Icons.location_on,
+                            color: Colors.teal,
+                          ),
+                          title: Text('Location Settings',
+                              style: TextStyle(
+                                  color: Colors.teal.shade500,
+                                  fontFamily: 'Source Sans Pro',
+                                  fontSize: 23.0)),
+                          onTap: () {},
+                        ),
+                        margin: EdgeInsets.symmetric(horizontal: 20),
+                        padding: EdgeInsets.symmetric(vertical: 3),
                       ),
-                      title: Text('Myer Briggs: INTJ-A',
-                          style: TextStyle(
-                              color: Colors.teal.shade900,
-                              fontFamily: 'Source Sans Pro',
-                              fontSize: 20.0)),
-                    ),
+                      SizedBox(
+                        //Spacing between text
+                        height: 0,
+                        width: 340.0,
+                        child: Divider(
+                          color: Colors.teal.shade100,
+                        ),
+                      ),
+                      //UserName Change
+                      Container(
+                        child: ListTile(
+                          trailing: Icon(
+                            Icons.edit,
+                            color: Colors.teal,
+                          ),
+                          title: Text('Username Change',
+                              style: TextStyle(
+                                  color: Colors.teal.shade500,
+                                  fontFamily: 'Source Sans Pro',
+                                  fontSize: 23.0)),
+                          onTap: () {},
+                        ),
+                        margin: EdgeInsets.symmetric(horizontal: 20),
+                        padding: EdgeInsets.symmetric(vertical: 3),
+                      ),
+                      SizedBox(
+                        //Spacing between text
+                        height: 0,
+                        width: 340.0,
+                        child: Divider(
+                          color: Colors.teal.shade100,
+                        ),
+                      ),
+                      //Preference Change
+                      Container(
+                        child: ListTile(
+                          trailing: Icon(
+                            Icons.chat,
+                            color: Colors.teal,
+                          ),
+                          title: Text('Preference Change',
+                              style: TextStyle(
+                                  color: Colors.teal.shade500,
+                                  fontFamily: 'Source Sans Pro',
+                                  fontSize: 23.0)),
+                          onTap: () {},
+                        ),
+                        margin: EdgeInsets.symmetric(horizontal: 20),
+                        padding: EdgeInsets.symmetric(vertical: 3),
+                      ),
+                      SizedBox(
+                        //Spacing between text
+                        height: 0,
+                        width: 340.0,
+                        child: Divider(
+                          color: Colors.teal.shade100,
+                        ),
+                      ),
+                      //Credit Card Info Change
+                      Container(
+                        child: ListTile(
+                          trailing: Icon(
+                            Icons.credit_card,
+                            color: Colors.teal,
+                          ),
+                          title: Text('Change Payment',
+                              style: TextStyle(
+                                  color: Colors.teal.shade500,
+                                  fontFamily: 'Source Sans Pro',
+                                  fontSize: 23.0)),
+                          onTap: () {},
+                        ),
+                        margin: EdgeInsets.symmetric(horizontal: 20),
+                        padding: EdgeInsets.symmetric(vertical: 3),
+                      ),
+                      SizedBox(
+                        //Spacing between text
+                        height: 0,
+                        width: 340.0,
+                        child: Divider(
+                          color: Colors.teal.shade100,
+                        ),
+                      ),
+                      //Notification
+                      Container(
+                        child: ListTile(
+                          trailing: Icon(
+                            Icons.notifications_active,
+                            color: Colors.teal,
+                          ),
+                          title: Text('Notifications',
+                              style: TextStyle(
+                                  color: Colors.teal.shade500,
+                                  fontFamily: 'Source Sans Pro',
+                                  fontSize: 23.0)),
+                          onTap: () {},
+                        ),
+                        margin: EdgeInsets.symmetric(horizontal: 20),
+                        padding: EdgeInsets.symmetric(vertical: 3),
+                      ),
+                      SizedBox(
+                        //Spacing between text
+                        height: 0,
+                        width: 340.0,
+                        child: Divider(
+                          color: Colors.teal.shade100,
+                        ),
+                      ),
+                    ],
                   ),
-                  //Dating Preferences
+                  SizedBox(
+                      //Spacing between text
+                      height: 20,
+                      child: Container()),
+                  //Support
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       //Text
                       Center(
                         child: Flexible(
-                          child: Text("Dating Preferences",
+                          child: Text("Support",
                               style: TextStyle(
                                 fontFamily: 'Source Sans Pro',
-                                fontSize: 23.0,
+                                fontSize: 25.0,
                                 color: Colors.teal[100],
                                 fontWeight: FontWeight.bold,
                                 letterSpacing: 2.0,
@@ -213,136 +314,80 @@ class _profile extends State<profileTab> {
                       ),
                     ],
                   ),
-                  //Age Range
-                  Card(
-                    color: Colors.white,
-                    margin:
-                        EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-                    child: ListTile(
-                      leading: Icon(
-                        Icons.people,
-                        color: Colors.teal,
-                      ),
-                      title: Text('Age Range: 18-22',
-                          style: TextStyle(
-                              color: Colors.teal.shade900,
-                              fontFamily: 'Source Sans Pro',
-                              fontSize: 20.0)),
-                    ),
-                  ),
-                  //Ethnicity
-                  Card(
-                    color: Colors.white,
-                    margin:
-                        EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-                    child: ListTile(
-                      leading: Icon(
-                        Icons.flag,
-                        color: Colors.teal,
-                      ),
-                      title: Text('Ethnicity: Open to all',
-                          style: TextStyle(
-                              color: Colors.teal.shade900,
-                              fontFamily: 'Source Sans Pro',
-                              fontSize: 20.0)),
-                    ),
-                  ),
-                  //Free Time Activities
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  Column(
                     children: <Widget>[
-                      //Text
-                      Center(
-                        child: Flexible(
-                          child: Text("Free Time Activities",
+                      //Help
+                      Container(
+                        child: ListTile(
+                          trailing: Icon(
+                            Icons.help,
+                            color: Colors.teal,
+                          ),
+                          title: Text('Help',
                               style: TextStyle(
-                                fontFamily: 'Source Sans Pro',
-                                fontSize: 23.0,
-                                color: Colors.teal[100],
-                                fontWeight: FontWeight.bold,
-                                letterSpacing: 2.0,
-                              )),
+                                  color: Colors.teal.shade500,
+                                  fontFamily: 'Source Sans Pro',
+                                  fontSize: 23.0)),
+                          onTap: () {},
                         ),
+                        margin: EdgeInsets.symmetric(horizontal: 20),
+                        padding: EdgeInsets.symmetric(vertical: 3),
                       ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
                       SizedBox(
                         //Spacing between text
-                        height: 20.0,
-                        width: 150.0,
+                        height: 0,
+                        width: 340.0,
+                        child: Divider(
+                          color: Colors.teal.shade100,
+                        ),
+                      ),
+                      //About
+                      Container(
+                        child: ListTile(
+                          trailing: Icon(
+                            Icons.question_answer,
+                            color: Colors.teal,
+                          ),
+                          title: Text('About',
+                              style: TextStyle(
+                                  color: Colors.teal.shade500,
+                                  fontFamily: 'Source Sans Pro',
+                                  fontSize: 23.0)),
+                          onTap: () {},
+                        ),
+                        margin: EdgeInsets.symmetric(horizontal: 20),
+                        padding: EdgeInsets.symmetric(vertical: 3),
+                      ),
+                      SizedBox(
+                        //Spacing between text
+                        height: 0,
+                        width: 340.0,
                         child: Divider(
                           color: Colors.teal.shade100,
                         ),
                       ),
                     ],
                   ),
-                  //Just Random stuff
-                  Card(
-                    color: Colors.white,
-                    margin:
-                        EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
+                  SizedBox(
+                      //Spacing between text
+                      height: 20,
+                      child: Container()),
+                  //Logout
+                  Container(
                     child: ListTile(
-                      leading: Icon(
-                        Icons.nature_people,
-                        color: Colors.teal,
+                      title: Text(
+                        'Log Out',
+                        style: TextStyle(
+                          color: Colors.teal.shade500,
+                          fontFamily: 'Source Sans Pro',
+                          fontSize: 25.0,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                      title: Text('User Input here',
-                          style: TextStyle(
-                              color: Colors.teal.shade900,
-                              fontFamily: 'Source Sans Pro',
-                              fontSize: 20.0)),
+                      onTap: () => signOut(),
                     ),
-                  ),
-                  Card(
-                    color: Colors.white,
-                    margin:
-                        EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-                    child: ListTile(
-                      leading: Icon(
-                        Icons.nature_people,
-                        color: Colors.teal,
-                      ),
-                      title: Text('User Input Here',
-                          style: TextStyle(
-                              color: Colors.teal.shade900,
-                              fontFamily: 'Source Sans Pro',
-                              fontSize: 20.0)),
-                    ),
-                  ),
-                  Card(
-                    color: Colors.white,
-                    margin:
-                        EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-                    child: ListTile(
-                      leading: Icon(
-                        Icons.nature_people,
-                        color: Colors.teal,
-                      ),
-                      title: Text('User Input here',
-                          style: TextStyle(
-                              color: Colors.teal.shade900,
-                              fontFamily: 'Source Sans Pro',
-                              fontSize: 20.0)),
-                    ),
-                  ),
-                  Card(
-                    color: Colors.white,
-                    margin:
-                        EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-                    child: ListTile(
-                      leading: Icon(
-                        Icons.nature_people,
-                        color: Colors.teal,
-                      ),
-                      title: Text('User Input Here',
-                          style: TextStyle(
-                              color: Colors.teal.shade900,
-                              fontFamily: 'Source Sans Pro',
-                              fontSize: 20.0)),
-                    ),
+                    margin: EdgeInsets.symmetric(horizontal: 150),
+                    padding: EdgeInsets.symmetric(vertical: 3),
                   ),
                 ],
               ),
@@ -351,141 +396,6 @@ class _profile extends State<profileTab> {
         ),
       ),
     );
-  }
-
-  void _onButtonPressed() {
-    showModalBottomSheet(
-        context: context,
-        builder: (context) {
-          return Container(
-            color: Colors.grey[850],
-            child: ListView(
-              children: <Widget>[
-                Column(
-                  children: <Widget>[
-                    //Delete Account
-                    ListTile(
-                      leading: Icon(
-                        Icons.delete,
-                        color: Colors.teal,
-                      ),
-                      title: Text('Delete Account',
-                          style: TextStyle(
-                              color: Colors.teal.shade500,
-                              fontFamily: 'Source Sans Pro',
-                              fontSize: 20.0)),
-                      onTap: () => _navigatePage(),
-                    ),
-                    //Location On
-                    ListTile(
-                      leading: Icon(
-                        Icons.location_on,
-                        color: Colors.teal,
-                      ),
-                      title: Text('Location Settings',
-                          style: TextStyle(
-                              color: Colors.teal.shade500,
-                              fontFamily: 'Source Sans Pro',
-                              fontSize: 20.0)),
-                      onTap: () => _navigatePage(),
-                    ),
-                    //UserName Change
-                    ListTile(
-                      leading: Icon(
-                        Icons.edit,
-                        color: Colors.teal,
-                      ),
-                      title: Text('Username Change',
-                          style: TextStyle(
-                              color: Colors.teal.shade500,
-                              fontFamily: 'Source Sans Pro',
-                              fontSize: 20.0)),
-                      onTap: () => _navigatePage(),
-                    ),
-                    //Preference Change
-                    ListTile(
-                      leading: Icon(
-                        Icons.chat,
-                        color: Colors.teal,
-                      ),
-                      title: Text('Preference Change',
-                          style: TextStyle(
-                              color: Colors.teal.shade500,
-                              fontFamily: 'Source Sans Pro',
-                              fontSize: 20.0)),
-                      onTap: () => _navigatePage(),
-                    ),
-                    //Credit Card Info Change
-                    ListTile(
-                      leading: Icon(
-                        Icons.credit_card,
-                        color: Colors.teal,
-                      ),
-                      title: Text('Change Payment',
-                          style: TextStyle(
-                              color: Colors.teal.shade500,
-                              fontFamily: 'Source Sans Pro',
-                              fontSize: 20.0)),
-                      onTap: () => _navigatePage(),
-                    ),
-                    //Notification
-                    ListTile(
-                      leading: Icon(
-                        Icons.notifications_active,
-                        color: Colors.teal,
-                      ),
-                      title: Text('Notifications',
-                          style: TextStyle(
-                              color: Colors.teal.shade500,
-                              fontFamily: 'Source Sans Pro',
-                              fontSize: 20.0)),
-                      onTap: () => _navigatePage(),
-                    ),
-                    //Help
-                    ListTile(
-                      leading: Icon(
-                        Icons.help,
-                        color: Colors.teal,
-                      ),
-                      title: Text('Help',
-                          style: TextStyle(
-                              color: Colors.teal.shade500,
-                              fontFamily: 'Source Sans Pro',
-                              fontSize: 20.0)),
-                      onTap: () => _navigatePage(),
-                    ),
-                    //About
-                    ListTile(
-                      leading: Icon(
-                        Icons.question_answer,
-                        color: Colors.teal,
-                      ),
-                      title: Text('About',
-                          style: TextStyle(
-                              color: Colors.teal.shade500,
-                              fontFamily: 'Source Sans Pro',
-                              fontSize: 20.0)),
-                      onTap: () => _navigatePage(),
-                    ),
-                    //Logout
-                    ListTile(
-                      title: Text(
-                        'Log Out',
-                        style: TextStyle(
-                          color: Colors.teal.shade500,
-                          fontFamily: 'Source Sans Pro',
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      onTap: () => signOut(),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          );
-        });
   }
 
   /*
