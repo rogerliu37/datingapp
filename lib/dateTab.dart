@@ -1,3 +1,4 @@
+import 'package:demo3rdwheelhp/screens/calendar_screen.dart';
 import 'package:demo3rdwheelhp/utils/universal_variables.dart';
 import 'package:flutter/material.dart';
 
@@ -267,12 +268,20 @@ class dateCards extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20.0),
                   ),
                   child: Container(
-                    child: Center(
-                      child: Text(
-                        formattedDate,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 35,
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => calendarScreen()));
+                      },
+                      child: Center(
+                        child: Text(
+                          formattedDate,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 35,
+                          ),
                         ),
                       ),
                     ),
