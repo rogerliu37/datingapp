@@ -1,5 +1,9 @@
+import 'package:demo3rdwheelhp/provider/user_provider.dart';
+import 'package:demo3rdwheelhp/resources/auth_methods.dart';
 import 'package:demo3rdwheelhp/screens/chat_list_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:provider/provider.dart';
 
 class HomeTab extends StatefulWidget {
   const HomeTab();
@@ -8,7 +12,33 @@ class HomeTab extends StatefulWidget {
   _homeTab createState() => _homeTab();
 }
 
-class _homeTab extends State<HomeTab> {
+class _homeTab extends State<HomeTab> with WidgetsBindingObserver {
+  PageController pageController;
+  int _page = 0;
+  final AuthMethods _authMethods = AuthMethods();
+
+  UserProvider userProvider;
+
+  @override
+  void initState() {
+    super.initState();
+
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      userProvider = Provider.of<UserProvider>(context, listen: false);
+      await userProvider.refreshUser();
+    });
+
+    WidgetsBinding.instance.addObserver(this);
+
+    pageController = PageController();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    WidgetsBinding.instance.removeObserver(this);
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -16,8 +46,8 @@ class _homeTab extends State<HomeTab> {
         Theme.of(context).textTheme.headline5.copyWith(color: Colors.white);
     final descriptionStyle = theme.textTheme.subtitle1;
 
-    return new Scaffold(
-      appBar: new AppBar(
+    return Scaffold(
+      appBar: AppBar(
         title: Image.asset('images/mainLogo.PNG',
             fit: BoxFit.cover, height: 150.0),
         backgroundColor: Colors.amber[200],

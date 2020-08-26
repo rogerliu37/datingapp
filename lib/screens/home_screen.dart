@@ -1,3 +1,4 @@
+import 'package:demo3rdwheelhp/tabs/dateTab.dart';
 import 'package:demo3rdwheelhp/utils/universal_variables.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -5,11 +6,10 @@ import 'package:demo3rdwheelhp/resources/firebase_repository.dart';
 import 'package:demo3rdwheelhp/screens/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:demo3rdwheelhp/homeTab.dart';
-import 'package:demo3rdwheelhp/dateTab.dart';
-import 'package:demo3rdwheelhp/newsTab.dart';
+import 'package:demo3rdwheelhp/tabs/homeTab.dart';
+import 'package:demo3rdwheelhp/tabs/newsTab.dart';
 import 'package:demo3rdwheelhp/profileTab.dart';
-import 'package:demo3rdwheelhp/createTab.dart';
+import 'package:demo3rdwheelhp/tabs/createTab.dart';
 
 class HomeScreen extends StatefulWidget {
   @override

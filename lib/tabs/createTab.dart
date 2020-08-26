@@ -1,30 +1,35 @@
 import 'package:flutter/material.dart';
-import 'matchTabSubPage1.dart';
+import '../matchTabSubPage1.dart';
 
-class forms extends StatelessWidget {
+class createTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        backgroundColor: Colors.redAccent[700],
+        appBar: new AppBar(
+          title: Image.asset('images/mainLogo.PNG',
+              fit: BoxFit.cover, height: 150.0),
+          backgroundColor: Colors.amber[200],
+        ),
+        backgroundColor: Colors.grey[850],
         body: Center(
           child: Container(
               decoration: BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage('images/background2.JPG'),
                       fit: BoxFit.cover)),
-              child: MyStatefulWidget()),
+              child: createForms()),
         ));
   }
 }
 
-class MyStatefulWidget extends StatefulWidget {
-  MyStatefulWidget({Key key}) : super(key: key);
+class createForms extends StatefulWidget {
+  createForms({Key key}) : super(key: key);
 
   @override
-  _MyStatefulWidgetState createState() => _MyStatefulWidgetState();
+  _createFormsState createState() => _createFormsState();
 }
 
-class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+class _createFormsState extends State<createForms> {
   final _formKey = GlobalKey<FormState>();
 
   @override

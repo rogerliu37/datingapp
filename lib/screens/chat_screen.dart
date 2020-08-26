@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo3rdwheelhp/constants/strings.dart';
+import 'package:demo3rdwheelhp/resources/auth_methods.dart';
+import 'package:demo3rdwheelhp/resources/chat_methods.dart';
 import 'package:flutter/material.dart';
 import 'package:demo3rdwheelhp/models/message.dart';
 import 'package:demo3rdwheelhp/models/user.dart';
@@ -24,8 +26,14 @@ class _ChatScreenState extends State<ChatScreen> {
    */
   TextEditingController textFieldController = TextEditingController();
   bool isWriting = false;
+  FocusNode textFieldFocus = FocusNode();
 
   FirebaseRepository _repository = FirebaseRepository();
+  final ChatMethods _chatMethods = ChatMethods();
+  final AuthMethods _authMethods = AuthMethods();
+
+  ScrollController _listScrollController = ScrollController();
+
   User sender;
 
   String _currentUserId;
@@ -34,7 +42,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   void initState() {
     super.initState();
-    _repository.getCurrentUser().then((user) {
+    _authMethods.getCurrentUser().then((user) {
       _currentUserId = user.uid;
       setState(() {
         sender = User(
@@ -45,6 +53,10 @@ class _ChatScreenState extends State<ChatScreen> {
       });
     });
   }
+
+  showKeyboard() => textFieldFocus.requestFocus();
+
+  hideKeyboard() => textFieldFocus.unfocus();
 
   @override
   Widget build(BuildContext context) {
@@ -80,6 +92,7 @@ class _ChatScreenState extends State<ChatScreen> {
         }
         return ListView.builder(
           padding: EdgeInsets.all(10),
+          controller: _listScrollController,
           itemCount: snapshot.data.documents.length,
           itemBuilder: (context, index) {
             return chatMessageItem(snapshot.data.documents[index]);
@@ -194,7 +207,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
       textFieldController.text = "";
 
-      _repository.addMessageToDb(_message, sender, widget.receiver);
+      _chatMethods.addMessageToDb(_message, sender, widget.receiver);
     }
 
     addMediaModal(context) {

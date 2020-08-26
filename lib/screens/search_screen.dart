@@ -1,3 +1,4 @@
+import 'package:demo3rdwheelhp/resources/auth_methods.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 //import 'package:gradient_app_bar/gradient_app_bar.dart';
@@ -15,6 +16,7 @@ class searchScreen extends StatefulWidget {
 
 class _searchScreenState extends State<searchScreen> {
   FirebaseRepository _repository = FirebaseRepository();
+  final AuthMethods _authMethods = AuthMethods();
 
   List<User> userList;
   String query = "";
@@ -32,8 +34,8 @@ class _searchScreenState extends State<searchScreen> {
   void initState() {
     super.initState();
 
-    _repository.getCurrentUser().then((FirebaseUser user) {
-      _repository.fetchAllUsers(user).then((List<User> list) {
+    _authMethods.getCurrentUser().then((FirebaseUser user) {
+      _authMethods.fetchAllUsers(user).then((List<User> list) {
         setState(() {
           userList = list;
         });

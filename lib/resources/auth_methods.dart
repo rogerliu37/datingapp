@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo3rdwheelhp/constants/strings.dart';
 import 'package:demo3rdwheelhp/models/message.dart';
@@ -5,22 +6,20 @@ import "package:firebase_auth/firebase_auth.dart";
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:demo3rdwheelhp/models/user.dart';
 import 'package:demo3rdwheelhp/utils/utilities.dart';
+import 'dart:io';
 
-class FirebaseMethods {
-  //Constanta
-  //TODO: Refactor all this to make simpler
+class AuthMethods {
   /*
     User Authentication
    */
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  //Sign in with google
-  GoogleSignIn _googleSignIn = GoogleSignIn();
+  static final Firestore _firestore = Firestore.instance;
 
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  GoogleSignIn _googleSignIn = GoogleSignIn();
   static final Firestore firestore = Firestore.instance;
-  User user = User();
 
   static final CollectionReference _userCollection =
-      firestore.collection(USERS_COLLECTION);
+      _firestore.collection(USERS_COLLECTION);
 
   Future<FirebaseUser> getCurrentUser() async {
     FirebaseUser currentUser;
@@ -28,9 +27,6 @@ class FirebaseMethods {
     return currentUser;
   }
 
-  /*
-  Getting User Details
-   */
   Future<User> getUserDetails() async {
     FirebaseUser currentUser = await getCurrentUser();
 
@@ -38,6 +34,17 @@ class FirebaseMethods {
         await _userCollection.document(currentUser.uid).get();
 
     return User.fromMap(documentSnapshot.data);
+  }
+
+  Future<User> getUserDetailsById(id) async {
+    try {
+      DocumentSnapshot documentSnapshot =
+          await _userCollection.document(id).get();
+      return User.fromMap(documentSnapshot.data);
+    } catch (e) {
+      print(e);
+      return null;
+    }
   }
 
   Future<FirebaseUser> signIn() async {
@@ -56,7 +63,6 @@ class FirebaseMethods {
   }
 
   Future<bool> authenticateUser(FirebaseUser user) async {
-    //Tell Firebase ro retrun list of all docs
     QuerySnapshot result = await firestore
         .collection(USERS_COLLECTION)
         .where(EMAIL_FIELD, isEqualTo: user.email)
@@ -64,47 +70,32 @@ class FirebaseMethods {
 
     final List<DocumentSnapshot> docs = result.documents;
 
-    //if user is registerted then length of list > 0 or else less than 0
+    //if user is registered then length of list > 0 or else less than 0
     return docs.length == 0 ? true : false;
   }
 
   Future<void> addDataToDb(FirebaseUser currentUser) async {
     String username = Utils.getUsername(currentUser.email);
-    user = User(
-      uid: currentUser.uid,
-      email: currentUser.email,
-      name: currentUser.displayName,
-      profilePhoto: currentUser.photoUrl,
-      username: username,
-    );
+
+    User user = User(
+        uid: currentUser.uid,
+        email: currentUser.email,
+        name: currentUser.displayName,
+        profilePhoto: currentUser.photoUrl,
+        username: username);
 
     firestore
         .collection(USERS_COLLECTION)
         .document(currentUser.uid)
         .setData(user.toMap(user));
   }
-  //Allow user to sign out of their accounts
 
-  Future<bool> signOut() async {
-    try {
-      //await _googleSignIn.disconnect();
-      await _googleSignIn.signOut();
-      await _auth.signOut();
-      return true;
-    } catch (e) {
-      print(e);
-      return false;
-    }
-  }
-
-  //Create a list of all users for searching
   Future<List<User>> fetchAllUsers(FirebaseUser currentUser) async {
     List<User> userList = List<User>();
 
     QuerySnapshot querySnapshot =
         await firestore.collection(USERS_COLLECTION).getDocuments();
     for (var i = 0; i < querySnapshot.documents.length; i++) {
-      //Prevent user from finding themselves
       if (querySnapshot.documents[i].documentID != currentUser.uid) {
         userList.add(User.fromMap(querySnapshot.documents[i].data));
       }
@@ -112,23 +103,11 @@ class FirebaseMethods {
     return userList;
   }
 
-  //Text messaging feature - adding to database & sending
-  Future<void> addMessageToDb(
-      Message message, User sender, User receiver) async {
-    //Handle message
-    var map = message.toMap();
-
-    //Link to Firestore
-    await firestore
-        .collection(MESSAGES_COLLECTION)
-        .document(message.senderId)
-        .collection(message.receiverId)
-        .add(map);
-    //Adding data for other user
-    return await firestore
-        .collection(MESSAGES_COLLECTION)
-        .document(message.receiverId)
-        .collection(message.senderId)
-        .add(map);
+  Future<void> signOut() async {
+    await _googleSignIn.signOut();
+    return await _auth.signOut();
   }
+
+  Stream<DocumentSnapshot> getUserStream({@required String uid}) =>
+      _userCollection.document(uid).snapshots();
 }

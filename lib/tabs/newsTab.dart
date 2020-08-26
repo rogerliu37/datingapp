@@ -2,9 +2,9 @@ import 'package:demo3rdwheelhp/resources/firebase_repository.dart';
 import 'package:demo3rdwheelhp/utils/universal_variables.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'matchTabSubPage1.dart';
-import 'models/restaurant.dart';
-import 'models/user.dart';
+import '../matchTabSubPage1.dart';
+import '../models/restaurant.dart';
+import '../models/user.dart';
 
 class newsTab extends StatelessWidget {
   @override
