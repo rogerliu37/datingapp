@@ -8,7 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:demo3rdwheelhp/tabs/homeTab.dart';
 import 'package:demo3rdwheelhp/tabs/newsTab.dart';
-import 'package:demo3rdwheelhp/profileTab.dart';
+import 'package:demo3rdwheelhp/tabs/profileTab.dart';
 import 'package:demo3rdwheelhp/tabs/createTab.dart';
 
 class HomeScreen extends StatefulWidget {
