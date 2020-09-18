@@ -56,14 +56,7 @@ class _calendarScreenState extends State<calendarScreen> {
         'Event C5'
       ],
       _selectedDay.subtract(Duration(days: 2)): ['Event A6', 'Event B6'],
-      _selectedDay: [
-        'Movies @ Gateway',
-        'Stroll at park',
-        'Boba',
-        'Mini Golf',
-        'Watching sunset',
-        'Netflix'
-      ],
+      _selectedDay: ['Movies @ Gateway', 'Stroll at park', 'Boba', 'Mini Golf', 'Watching sunset','Netflix'],
       _selectedDay.add(Duration(days: 1)): [
         'Event A8',
         'Event B8',
